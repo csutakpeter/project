@@ -3,4 +3,4 @@ project(projekt C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(projekt main.c)
+add_executable(projekt main.c board.c board.h user.c user.h card.c card.h)

@@ -1,4 +1,5 @@
-#include <stdio.h>
+
+#include "board.h"
 
 int main() {
     printf("Hello, World!\n");
