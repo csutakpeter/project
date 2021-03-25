@@ -9,7 +9,7 @@
 
 typedef struct {
     char* boardName;
-    USER* users;
+    CARD* cards;
 }BOARD;
 
 BOARD createBoard();

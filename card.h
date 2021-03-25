@@ -7,19 +7,23 @@
 
 #include "user.h"
 
+enum { TO_DO, DOING, DONE };
+
 typedef struct {
     char* title;
     char* description;
-    char* status;
+    int status;
     //jelenleg a kartyan dolgozo felhasznalo
-    USER workingUser;
+    USER currentUser;
     //a kartyan mar dolgozott felhasznalok (tomb)
     USER* previousUsers;
 }CARD;
 
 CARD createCard();
+char* setNewTitle();
+char* setNewDescription();
 void deleteCard(CARD*);
-void modifyUser(CARD*);
+void setNewUser(CARD*, USER);
 void getPreviousUsers(CARD);
 void changeStatus(CARD*);
 void getStatus(CARD);

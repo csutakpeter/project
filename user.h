@@ -8,6 +8,8 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <string.h>
 
 typedef struct {
     char* code;
@@ -15,7 +17,8 @@ typedef struct {
 }USER;
 
 USER createUser();
-char generateUniqueCode();
+char* generateUniqueCode();
+void printUserData(USER);
 
 
 #endif //PROJEKT_USER_H
