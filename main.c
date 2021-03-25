@@ -3,10 +3,9 @@
 
 int main() {
 
-//    USER newUser = createUser();
-//    printUserData(newUser);
 
-//    CARD newCard1 = createCard();
+    USER user1 = createUser();
+    printUserData(user1);
 
     return 0;
 }

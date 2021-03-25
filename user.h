@@ -12,11 +12,15 @@
 #include <string.h>
 
 typedef struct {
+    char* name;
     char* code;
     bool isAttachedToTable;
 }USER;
 
+
+
 USER createUser();
+char* setName();
 char* generateUniqueCode();
 void printUserData(USER);
 
