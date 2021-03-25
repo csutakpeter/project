@@ -2,9 +2,10 @@
 #include "board.h"
 
 int main() {
-    printf("Hello, World!\n");
-    printf("Gal Attila is csatlakozott!");
-    printf("Burszan Hunor is csatlakozott!");
-    printf("Csutak is csatlakozott!");
+
+
+    USER user1 = createUser();
+    printUserData(user1);
+
     return 0;
 }
