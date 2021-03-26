@@ -16,7 +16,7 @@ USER createUser()
     newUser.name = setName();
     if( !strcmp(newUser.name,WRONG) )
     {
-        printf("Couldn't create user! Program is shutting down!");
+        printf("\nCouldn't create user name! Program is shutting down!");
         exit(1);
     }
     newUser.code = generateUniqueCode();
@@ -31,7 +31,7 @@ char* setName()
     newUserName = (char*)malloc(NAME_LIMIT*sizeof (char));
     if(newUserName==NULL)
     {
-        printf("Something went wrong with name giving!\n");
+        printf("\nSomething went wrong with name giving!\n");
         return WRONG;
     }
 
@@ -39,13 +39,6 @@ char* setName()
         printf( "\nEnter a new name! (maximum %d character)\n", NAME_LIMIT - 1 );
         gets( newUserName );
     } while ( strlen(newUserName) >= NAME_LIMIT || strlen(newUserName) == 0 );
-
-    /*newUserName = (char*)realloc(newUserName,(strlen(newUserName)+1)*sizeof (char));//+1 a \0 miatt
-    if(newUserName==NULL)
-    {
-        printf("Something went wrong with name giving");
-        return WRONG;
-    }*/
 
     return newUserName;
 }
@@ -58,7 +51,7 @@ char* generateUniqueCode()
     newUniqueCode = (char*)malloc(SIZE_OF_UNIQUE_CODE*sizeof (char));
     if(newUniqueCode==NULL)
     {
-        printf("Couldn't create unique code! Program is shutting down!");
+        printf("\nCouldn't create unique code! Program is shutting down!");
         exit(1);
     }
 
@@ -72,5 +65,5 @@ char* generateUniqueCode()
 void printUserData(USER user)
 {
     printf("User -\tname: %s\n\tcode: %s\n\t%s", user.name, user.code,
-           ( user.isAttachedToTable ) ? "This user is attached to a table." : "This user is not attached to any table.");
+           ( user.isAttachedToTable ) ? "This user is attached to a table.\n" : "This user is not attached to any table.\n");
 }

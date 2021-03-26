@@ -17,6 +17,7 @@ typedef struct {
     USER currentUser;
     //a kartyan mar dolgozott felhasznalok (tomb)
     USER* previousUsers;
+    int prvUserIndex;
 }CARD;
 
 CARD createCard();

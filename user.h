@@ -17,8 +17,6 @@ typedef struct {
     bool isAttachedToTable;
 }USER;
 
-
-
 USER createUser();
 char* setName();
 char* generateUniqueCode();
