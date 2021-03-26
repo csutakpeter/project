@@ -7,7 +7,7 @@
 
 #include "user.h"
 
-enum { TO_DO, DOING, DONE };
+enum { TO_DO = 1, DOING, DONE };
 
 typedef struct {
     char* title;
@@ -26,7 +26,8 @@ char* setNewDescription();
 void deleteCard(CARD*);
 void setNewUser(CARD*, USER);
 void getPreviousUsers(CARD);
-void changeStatus(CARD*);
-void getStatus(CARD);
+void changeCardStatus(CARD*);
+char* getCardStatus(CARD);
+void printCardData(CARD);
 
 #endif //PROJEKT_CARD_H

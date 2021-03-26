@@ -26,8 +26,12 @@ CARD createCard()
         exit(1);
     }
 
+    newCard.currentUser.name = NULL;
+    newCard.currentUser.code = NULL;
+    newCard.currentUser.isAttachedToTable = NULL;
+
     newCard.prvUserIndex = 0;
-    newCard.previousUsers = (USER*)malloc(1*sizeof(USER));
+    newCard.previousUsers = (USER*)malloc(0*sizeof(USER));
     if ( !newCard.previousUsers ) {
         printf("\nCouldn't allocate memory at card previous users!");
         exit(1);
@@ -38,12 +42,6 @@ CARD createCard()
 
 char* setNewTitle()
 {
-//    do {
-//        printf("\nGive new a title to this card! (maximum %d character)\n", TITLE_LIMIT);
-//        gets(titleBuffer);
-//    } while ( strlen(titleBuffer) > TITLE_LIMIT );
-//    return titleBuffer;
-
     char* newCardTitle;
 
     newCardTitle = (char*)malloc(TITLE_LIMIT*sizeof (char));
@@ -63,12 +61,6 @@ char* setNewTitle()
 
 char* setNewDescription()
 {
-//    do {
-//        printf("\nGive new a description to this card! (maximum %d character)\n", DESCRIPTION_LIMIT);
-//        gets(descriptionBuffer);
-//    } while ( strlen(descriptionBuffer) > DESCRIPTION_LIMIT );
-//    return titleBuffer;
-
     char* newCardDescription;
 
     newCardDescription = (char*)malloc(DESCRIPTION_LIMIT * sizeof (char));
@@ -88,43 +80,75 @@ char* setNewDescription()
 
 void setNewUser(CARD* card, USER user)
 {
-    if ( (*card).currentUser.code == NULL ) {
-        (*card).currentUser.code = user.code;
-        (*card).currentUser.name = user.name;
-        (*card).currentUser.isAttachedToTable = user.isAttachedToTable;
-        (*card).previousUsers[0] = user;
-        printf("\nThis user does not exist!");
+    if ( !(*card).title || !(*user.name) ) {
+        printf("\nCouldn't add this user to this card!");
         return;
     }
 
-    ++(*card).prvUserIndex;
-    (*card).previousUsers = (USER*)realloc( (*card).previousUsers, ((*card).prvUserIndex)*sizeof(USER));
-    if ( !(*card).previousUsers ) {
-        printf("\nCouldn't allocate memory at previous users!");
-        exit(1);
+    if ( user.isAttachedToTable ) {
+        (*card).currentUser = user;
+        (*card).previousUsers[ (*card).prvUserIndex++ ] = user;
     }
 
-    (*card).previousUsers[ (*card).prvUserIndex ] = (*card).currentUser;
-    (*card).currentUser.code = user.code;
-    (*card).currentUser.name = user.name;
-    (*card).currentUser.isAttachedToTable = user.isAttachedToTable;
 }
 
 void deleteCard(CARD* card)
 {
-    free((*card).description);
-    free((*card).title);
+    (*card).description = NULL;
+    (*card).title = NULL;
+    (*card).currentUser.name = NULL;
+    (*card).currentUser.code = NULL;
     free((*card).previousUsers);
-    free((*card).currentUser.name);
-    free((*card).currentUser.code);
-    free(card);
 }
 
 void getPreviousUsers(CARD card)
 {
-    printf("\nUsers who worked on this card: %s\n", card.title);
-    for (int i = 0; i < card.prvUserIndex; ++i) {
-        printUserData(card.previousUsers[i]);
+    printf("\nPrevious users of card %s:\n", card.title);
+    if ( card.prvUserIndex ) {
+        for (int i = 0; i < card.prvUserIndex; ++i) {
+            printUserData(card.previousUsers[i]);
+        }
+    } else {
+       printf("\tThere are no previous user of this card!\n");
+    }
+}
+
+void printCardData(CARD card)
+{
+    if ( !card.title )
+        return;
+
+    printf("Card -\ttitle: %s\n\tdescription: %s\n\tstatus: %s\n\tcurrent user: ", card.title, card.description, getCardStatus(card));
+    if ( card.currentUser.name ) {
+        printf("\n");
+        printUserData(card.currentUser);
+    }
+    else {
+        printf(" -\n");
+    }
+}
+
+void changeCardStatus(CARD* card)
+{
+    static int status;
+
+    printf("\nWhat should be the status of this card? (type TO_DO (1), DOING (2) or DONE (3))\n");
+    scanf("%d", &status);
+    while ( status > 3 || status < 1 ) {
+        printf("\nThat's not a valid value! Type again!\n");
+        scanf("%d", &status);
+    }
+
+    (*card).status = status;
+}
+
+char* getCardStatus(CARD card)
+{
+    switch ( card.status ) {
+        case TO_DO: return "TO_DO";
+        case DOING: return "DOING";
+        case DONE: return "DONE";
+        default: return "TO_DO";
     }
 }
 

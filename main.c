@@ -7,27 +7,21 @@ int main() {
     printUserData(u1);
     printf("\n");
 
-    printUserData(u1);
+    USER u2 = createUser();
+    printUserData(u2);
     printf("\n");
 
-//    USER u2 = createUser();
-//    printUserData(u2);
-//    printf("\n");
-//
-//    USER u = createUser();
-//    printUserData(u);
-//    printf("\n");
-
     CARD c = createCard();
-    printf("\nitt1\n");
-    setNewUser(&c,u1);
-    getPreviousUsers(c);
-    printf("\nitt2\n");
-    setNewUser(&c,u1);
-    printf("\nit3\n");
-    setNewUser(&c,u1);
+    setNewUser(&c, u1);
+//    printCardData(c);
+//    setNewUser(&c, u2);
+//    printCardData(c);
+//
+//    getPreviousUsers(c);
 
-    getPreviousUsers(c);
+    changeCardStatus(&c);
+    printCardData(c);
+
 
 
     return 0;
