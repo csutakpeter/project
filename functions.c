@@ -176,23 +176,16 @@ void action4(BOARD** boards, int numberOfBoards, USER** users, int numberOfUsers
         return;
     }
 
-//    char temp;
-//    char buf[ANSWER_BUFFER_LIMIT];
-
-//    printf("\nDo you want to add user by code or by name? (0 - code)\n");
-//    printf("Enter a number: ");
-//    if ( !fgets(buf, ANSWER_BUFFER_LIMIT, stdin) ) {
-//        exit(1);
-//    }
-//
-//    temp = atoi(buf);
-
-
     printf("\nType the name of the user!\n");
 
     int userIndex = searchUserByName((*users), numberOfUsers, getAString(USER_NAME_LIMIT));
     if ( userIndex == NOT_FOUND ) {
         printf("\nUser not found!");
+        return;
+    }
+
+    if ( (*boards)[boardIndex].usersIndex == 0) {
+        addUserToBoard(&(*boards)[boardIndex], &(*users)[userIndex]);
         return;
     }
 
@@ -379,7 +372,7 @@ void action11(BOARD* boards, int numberOfBoards) {
     printf("\nThe status of this card: %s", getCardStatus(boards[boardIndex].cards[cardIndex]));
 }
 
-void action12(BOARD**, int)
+void action12(BOARD** board, int numberOfBoards)
 {
 
 }

@@ -42,7 +42,7 @@ void menu(BOARD** pBoards, int* pNumberOfBoards, USER** pUsers, int* pNumberOfUs
                 // egy kartya statuszanak lekerdezese
             case 12 : action11((*pBoards), (*pNumberOfBoards)); break;
                 // kartya adatainak valtoztatasa
-            case 13 : action13(pBoards, (*pNumberOfBoards)); break;
+            case 13 : action13((*pBoards), (*pNumberOfBoards)); break;
                 // barmilyen statuszu kartya megjelenitese
             case 14 : action13((*pBoards), (*pNumberOfBoards)); break;
             default : break;
