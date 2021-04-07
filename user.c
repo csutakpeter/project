@@ -4,8 +4,6 @@
 
 #include "user.h"
 
-#define SIZE_OF_UNIQUE_CODE 7
-
 const char CODE_VARIABLES[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//az egyedi kod generalasahoz szukseges
 
 USER createUser()
@@ -62,10 +60,11 @@ char* generateUniqueCode()
         exit(1);
     }
 
-    for( int i = 0; i < SIZE_OF_UNIQUE_CODE; ++i )
+    for( int i = 0; i < SIZE_OF_UNIQUE_CODE - 1; ++i )
     {
         newUniqueCode[i] = CODE_VARIABLES [rand() % 62];
     }
+    newUniqueCode[SIZE_OF_UNIQUE_CODE - 1] = 0;
     return newUniqueCode;
 }
 

@@ -162,8 +162,6 @@ void deleteCardFromBoard(BOARD* board, int index)
     if ( index >= (*board).cardsIndex )
         return;
 
-    //deleteCard(&(*board).cards[index]);
-
     for ( int i = index; i < (*board).cardsIndex - 1; ++i) {
         (*board).cards[i] = (*board).cards[i+1];
     }

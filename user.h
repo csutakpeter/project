@@ -15,6 +15,7 @@
 #define WRONG "-1"
 #define USER_NAME_LIMIT 31 //30+1 \0 miatt
 #define ANSWER_BUFFER_LIMIT 10
+#define SIZE_OF_UNIQUE_CODE 8
 
 typedef struct {
     char* boardName;

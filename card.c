@@ -3,9 +3,7 @@
 //
 
 #include "card.h"
-
-#define TITLE_LIMIT 51 //egy hely fent van tartva a \0 -nak
-#define DESCRIPTION_LIMIT 251
+#include "functions.h"
 
 CARD createCard()
 {
@@ -25,9 +23,9 @@ CARD createCard()
         exit(1);
     }
 
-//    newCard.currentUser.name = NULL;
-//    newCard.currentUser.code = NULL;
-//    newCard.currentUser.boards = NULL;
+    newCard.currentUser.name = NULL;
+    newCard.currentUser.code = NULL;
+    newCard.currentUser.boards = NULL;
     newCard.currentUser.userBoardIndex = 0;
 
     newCard.prvUserIndex = 0;
@@ -89,16 +87,23 @@ void setNewUser(CARD* card, USER user)
         return;
     }
 
-    if ( user.userBoardIndex ) {
-        (*card).currentUser = user;
-        (*card).previousUsers = (USER*)realloc( (*card).previousUsers, (*card).prvUserIndex+1 * sizeof(USER) );
-        if ( !(*card).previousUsers ) {
-            printf("\nCouldn't reallocate memory at set new user to card!");
-            exit(1);
+    if ( user.userBoardIndex) {
+        int userIndex = searchUserByName((*card).previousUsers, (*card).prvUserIndex, user.name);
+        if (userIndex == NOT_FOUND) {
+            (*card).currentUser = user;
+            (*card).previousUsers = (USER *) realloc((*card).previousUsers, (*card).prvUserIndex + 1 * sizeof(USER));
+            if (!(*card).previousUsers) {
+                printf("\nCouldn't reallocate memory at set new user to card!");
+                exit(1);
+            }
+            //beletesszuk a jelenlegi felhasznalot az elozo felhasznalok koze
+            (*card).previousUsers[(*card).prvUserIndex++] = user;
+            qsort((*card).previousUsers, (*card).prvUserIndex, sizeof(CARD), userNameCmp);
+        } else {
+            (*card).currentUser = user;
         }
-        //egybol beletesszuk a jelenlegi felhasznalot az elozo felhasznalok koze
-        (*card).previousUsers[ (*card).prvUserIndex++ ] = user;
     }
+
 }
 
 void deleteCard(CARD* card)
@@ -140,14 +145,12 @@ void printCardData(CARD card) {
 
 void changeCardStatus(CARD* card)
 {
-    const int bufferLimit = 2;
-
     int status;
-    char buf[bufferLimit];
+    char buf[ANSWER_BUFFER_LIMIT];
 
     do {
         printf("\nWhat should be the status of this card? (type TO_DO (1), DOING (2) or DONE (3))\n");
-        if ( !fgets(buf, bufferLimit, stdin) ) {
+        if ( !fgets(buf, ANSWER_BUFFER_LIMIT, stdin) ) {
             printf("\nCouldn't read input!");
             exit(1);
         }

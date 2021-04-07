@@ -34,7 +34,17 @@ void menu(BOARD** pBoards, int* pNumberOfBoards, USER** pUsers, int* pNumberOfUs
                 // kartya torlese tablabol
             case 8 : action7(pBoards, (*pNumberOfBoards)); break;
                 // user hozzaadasa kartyahoz
-            case 9 : action8(pBoards, (*pNumberOfBoards), pUsers, (*pNumberOfUsers));
+            case 9 : action8(pBoards, (*pNumberOfBoards)); break;
+                // kartyan dolgozott felhasznalok lekerdezese
+            case 10 : action9((*pBoards), (*pNumberOfBoards)); break;
+                // kartya statuszanak megvaltoztatasa
+            case 11 : action10(pBoards, (*pNumberOfBoards)); break;
+                // egy kartya statuszanak lekerdezese
+            case 12 : action11((*pBoards), (*pNumberOfBoards)); break;
+                // kartya adatainak valtoztatasa
+            case 13 : action13(pBoards, (*pNumberOfBoards)); break;
+                // barmilyen statuszu kartya megjelenitese
+            case 14 : action13((*pBoards), (*pNumberOfBoards)); break;
             default : break;
         }
     } while ( answer );

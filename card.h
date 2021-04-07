@@ -7,6 +7,9 @@
 
 #include "user.h"
 
+#define TITLE_LIMIT 51 //egy hely fent van tartva a \0 -nak
+#define DESCRIPTION_LIMIT 251
+
 enum { TO_DO = 1, DOING, DONE };
 
 typedef struct {
