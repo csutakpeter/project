@@ -4,8 +4,6 @@
 
 #include "user.h"
 
-#define NAME_LIMIT 31 //30+1 \0 miatt
-#define WRONG "-1"
 #define SIZE_OF_UNIQUE_CODE 7
 
 const char CODE_VARIABLES[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//az egyedi kod generalasahoz szukseges
@@ -14,13 +12,20 @@ USER createUser()
 {
     USER newUser;
     newUser.name = setName();
-    if( !strcmp(newUser.name,WRONG) )
-    {
+    if( !strcmp(newUser.name,WRONG) ) {
         printf("\nCouldn't create user name! Program is shutting down!");
         exit(1);
     }
+
     newUser.code = generateUniqueCode();
-    newUser.isAttachedToTable = false;
+
+    newUser.boards = (USER_BOARDS*)malloc(1*sizeof(USER_BOARDS));
+    if ( !newUser.boards ) {
+        printf("\nCouldn't reallocate memory at user boards!");
+        exit(1);
+    }
+    newUser.userBoardIndex = 0;
+
     return newUser;
 }
 
@@ -28,17 +33,19 @@ char* setName()
 {
     char* newUserName;
 
-    newUserName = (char*)malloc(NAME_LIMIT*sizeof (char));
-    if(newUserName==NULL)
-    {
+    newUserName = (char*)malloc(USER_NAME_LIMIT * sizeof (char));
+
+    if(newUserName==NULL) {
         printf("\nSomething went wrong with name giving!\n");
         return WRONG;
     }
 
     do {
-        printf( "\nEnter a new name! (maximum %d character)\n", NAME_LIMIT - 1 );
-        gets( newUserName );
-    } while ( strlen(newUserName) >= NAME_LIMIT || strlen(newUserName) == 0 );
+        printf("\nEnter a new user name! (maximum %d character)\n", USER_NAME_LIMIT - 1 );
+        if ( fgets( newUserName, USER_NAME_LIMIT, stdin ) ) {
+            newUserName[strcspn(newUserName, "\n")] = 0;
+        } else continue;
+    } while (strlen(newUserName) >= USER_NAME_LIMIT || strlen(newUserName) == 0 );
 
     return newUserName;
 }
@@ -64,6 +71,11 @@ char* generateUniqueCode()
 
 void printUserData(USER user)
 {
+    if (!user.code) {
+        printf("This user does not exist!\n");
+        return;
+    }
+
     printf("User -\tname: %s\n\tcode: %s\n\t%s", user.name, user.code,
-           ( user.isAttachedToTable ) ? "This user is attached to a table.\n" : "This user is not attached to any table.\n");
+           ( user.userBoardIndex ) ? "This user is attached to a table.\n" : "This user is not attached to any table.\n");
 }

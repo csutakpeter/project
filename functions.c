@@ -1,0 +1,236 @@
+//
+// Created by bursz on 2021. 04. 06..
+//
+
+#include "functions.h"
+
+void initializeBoards(BOARD** boards, int* numberOfBoards)
+{
+    (*boards) = (BOARD*)malloc(1*sizeof(BOARD));
+    if ( !(*boards) )
+        exit(1);
+
+    (*numberOfBoards) = 0;
+}
+
+void initializeUsers(USER** users, int* numberOfUsers)
+{
+    (*users) = (USER*)malloc(1*sizeof(USER));
+    if ( !(*users) )
+        exit(1);
+
+    (*numberOfUsers) = 0;
+}
+
+int searchUserByCodeInBoard(BOARD* board, char* searchedCode)
+{
+    int first = 0, last = (*board).usersIndex - 1, middle = (first+last)/2;
+    while ( first <= last ) {
+        if (strcmp((*board).users[middle].code, searchedCode ) < 0 )
+            first = middle + 1;
+        else if ( !strcmp((*board).users[middle].code, searchedCode) ) {
+            return middle;
+        } else
+            last = middle - 1;
+
+        middle = ( first + last ) / 2;
+    }
+    return NOT_FOUND;
+}
+
+int searchUserByNameInBoard(BOARD* board,  char* searchedName )
+{
+    for (int i = 0; i < (*board).usersIndex; ++i) {
+        if ( !strcmp( (*board).users[i].name, searchedName) )
+            return i;
+    }
+    return NOT_FOUND;
+}
+
+int searchCardByTitle(BOARD* board, char* searchedTitle)
+{
+    int first = 0, last = (*board).cardsIndex - 1, middle = (first+last)/2;
+    while ( first <= last ) {
+        if ( strcmp( (*board).cards[middle].title, searchedTitle ) < 0 )
+            first = middle + 1;
+        else if ( !strcmp((*board).cards[middle].title, searchedTitle) ) {
+            return middle;
+        } else
+            last = middle - 1;
+
+        middle = ( first + last ) / 2;
+    }
+    return NOT_FOUND;
+}
+
+int searchBoardByName(BOARD* boards, int numberOfBoards, char* searchedName)
+{
+    int first = 0, last = numberOfBoards - 1, middle = (first+last)/2;
+    while ( first <= last ) {
+        if ( strcmp( boards[middle].boardName, searchedName ) < 0 )
+            first = middle + 1;
+        else if ( !strcmp( boards[middle].boardName, searchedName) ) {
+            return middle;
+        } else
+            last = middle - 1;
+
+        middle = ( first + last ) / 2;
+    }
+    return NOT_FOUND;
+}
+
+int searchUserByName(USER* users, int numberOfUsers, char* searchedName)
+{
+    int first = 0, last = numberOfUsers - 1, middle = (first+last)/2;
+    while ( first <= last ) {
+        if ( strcmp( users[middle].name, searchedName ) < 0 )
+            first = middle + 1;
+        else if ( !strcmp( users[middle].name, searchedName) ) {
+            return middle;
+        } else
+            last = middle - 1;
+
+        middle = ( first + last ) / 2;
+    }
+    return NOT_FOUND;
+}
+
+int cmpfunc(const void * a, const void * b)
+{
+    BOARD* pa = (BOARD*)a;
+    BOARD* pb = (BOARD*)b;
+    return strcmp(pa->boardName, pb->boardName);
+}
+
+char* getAString(int limit)
+{
+    char* str = (char*)malloc(limit*sizeof(char));
+    if ( !str ) {
+        printf("\nSomething went wrong!");
+        exit(1);
+    }
+
+    if ( fgets(str, limit, stdin) ) {
+        str[strcspn(str, "\n")] = 0;
+    }
+    return str;
+}
+
+void action1(USER** users, int* numberOfUsers )
+{
+    (*users) = (USER*)realloc( (*users), ((*numberOfUsers) + 1) * sizeof(USER) );
+    if ( !(*users) )
+        exit(1);
+    (*users)[(*numberOfUsers)++] = createUser();
+    qsort((*users), (*numberOfUsers), sizeof(USER), cmpfunc);
+}
+
+void action2(USER* users, int numberOfUsers ) {
+    if ( !numberOfUsers) {
+        printf("\nThere are no users!");
+        return;
+    }
+
+    for (int i = 0; i < numberOfUsers; ++i) {
+        printUserData(users[i]);
+    }
+}
+
+void action3(BOARD** boards, int* numberOfBoards)
+{
+    (*boards) = (BOARD*)realloc( (*boards), ((*numberOfBoards) + 1) * sizeof (BOARD));
+    if ( !(*boards) )
+        exit(1);
+
+    (*boards)[(*numberOfBoards)++] = createBoard();
+    qsort((*boards), (*numberOfBoards), sizeof(BOARD), cmpfunc);
+}
+
+void action4(BOARD** boards, int numberOfBoards, USER** users, int numberOfUsers)
+{
+    if ( !numberOfBoards ) {
+        printf("\nThere are no boards!");
+        return;
+    }
+
+    if ( !numberOfUsers) {
+        printf("\nThere are no users!");
+        return;
+    }
+
+    printf("\nWhich board do you want to add a user to? (type board name)\n");
+
+    int boardIndex = searchBoardByName((*boards), numberOfBoards, getAString(BOARD_NAME_LIMIT));
+    if ( boardIndex == NOT_FOUND ) {
+        printf("\nBoard not found!");
+        return;
+    }
+
+    char temp;
+    char buf[ANSWER_BUFFER_LIMIT];
+
+    printf("\nDo you want to add user by code or by name? (0 - code)\n");
+    printf("Enter a number: ");
+    if ( !fgets(buf, ANSWER_BUFFER_LIMIT, stdin) ) {
+        exit(1);
+    }
+
+    temp = atoi(buf);
+
+    if ( temp != 0) {
+        printf("\nType the name of the user!\n");
+
+        int userIndex = searchUserByName((*users), numberOfUsers, getAString(USER_NAME_LIMIT));
+        if ( userIndex == NOT_FOUND ) {
+            printf("\nUser not found!");
+            return;
+        }
+
+        if ( searchUserByCodeInBoard( boards[boardIndex], (*users)[userIndex].code ) != NOT_FOUND ) {
+            printf("\nUser is already member of this board!");
+        } else {
+            addUserToBoard(&(*boards)[boardIndex], &(*users)[userIndex]);
+        }
+    }
+}
+
+void action5(BOARD* boards, int numberOfBoards)
+{
+    if ( !numberOfBoards ) {
+        printf("\nThere are no boards!");
+        return;
+    }
+
+    printf("\nWhich board data do you want to see? (type board name)\n");
+
+    int boardIndex = searchBoardByName(boards, numberOfBoards, getAString(BOARD_NAME_LIMIT));
+    if ( boardIndex == NOT_FOUND) {
+        printf("\nBoard not found!");
+        return;
+    }
+
+    printBoardData(boards[boardIndex]);
+}
+
+void action6(BOARD** boards, int numberOfBoards)
+{
+    if ( !numberOfBoards ) {
+        printf("\nThere are no boards!");
+        return;
+    }
+
+    printf("\nWhich board data do you want to add a card too? (type board name)\n");
+
+    int boardIndex = searchBoardByName((*boards), numberOfBoards, getAString(BOARD_NAME_LIMIT));
+    if ( boardIndex == NOT_FOUND) {
+        printf("\nBoard not found!");
+        return;
+    }
+
+    addCardToBoard(&(*boards)[boardIndex]);
+}
+
+void action7(BOARD** boards, int numberOfBoards)
+{
+
+}

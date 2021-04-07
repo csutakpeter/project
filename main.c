@@ -1,28 +1,18 @@
 
-#include "board.h"
+#include "menu.h"
 
 int main() {
 
-    USER u1 = createUser();
-    printUserData(u1);
-    printf("\n");
+    int numberOfBoards, numberOfUsers;
+    BOARD* boards;
+    USER* users;
 
-    USER u2 = createUser();
-    printUserData(u2);
-    printf("\n");
+    initializeBoards(&boards, &numberOfBoards);
+    initializeUsers(&users, &numberOfUsers);
 
-    CARD c = createCard();
-    setNewUser(&c, u1);
-//    printCardData(c);
-//    setNewUser(&c, u2);
-//    printCardData(c);
-//
-//    getPreviousUsers(c);
+    menu(&boards, &numberOfBoards, &users, &numberOfUsers);
 
-    changeCardStatus(&c);
-    printCardData(c);
-
-
-
+    printf("\nGoodbye!");
     return 0;
 }
+

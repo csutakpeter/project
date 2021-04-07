@@ -7,15 +7,21 @@
 
 #include "card.h"
 
+#define BOARD_NAME_LIMIT 51
+
 typedef struct {
     char* boardName;
     CARD* cards;
+    int cardsIndex;
     USER* users;
+    int usersIndex;
 }BOARD;
 
 BOARD createBoard();
-void addUsersToBoard(BOARD*);
-void addCardsToBoard(BOARD*);
-
+char* setNewBoardName();
+void addUserToBoard(BOARD*, USER*);
+void addCardToBoard(BOARD*);
+void printBoardData(BOARD);
+void deleteCardFromBoard(BOARD*, int);
 
 #endif //PROJEKT_BOARD_H

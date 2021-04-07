@@ -5,7 +5,6 @@
 #include "card.h"
 
 #define TITLE_LIMIT 51 //egy hely fent van tartva a \0 -nak
-#define WRONG "-1"
 #define DESCRIPTION_LIMIT 251
 
 CARD createCard()
@@ -26,12 +25,13 @@ CARD createCard()
         exit(1);
     }
 
-    newCard.currentUser.name = NULL;
-    newCard.currentUser.code = NULL;
-    newCard.currentUser.isAttachedToTable = NULL;
+//    newCard.currentUser.name = NULL;
+//    newCard.currentUser.code = NULL;
+//    newCard.currentUser.boards = NULL;
+    newCard.currentUser.userBoardIndex = 0;
 
     newCard.prvUserIndex = 0;
-    newCard.previousUsers = (USER*)malloc(0*sizeof(USER));
+    newCard.previousUsers = (USER*)malloc(1*sizeof(USER));
     if ( !newCard.previousUsers ) {
         printf("\nCouldn't allocate memory at card previous users!");
         exit(1);
@@ -52,8 +52,10 @@ char* setNewTitle()
     }
 
     do {
-        printf( "\nEnter a new title! (maximum %d character)\n", TITLE_LIMIT - 1 );
-        gets( newCardTitle );
+        printf( "\nEnter a new card title! (maximum %d character)\n", TITLE_LIMIT - 1 );
+        if ( fgets( newCardTitle, TITLE_LIMIT, stdin ) ) {
+            newCardTitle[strcspn(newCardTitle, "\n")] = 0;
+        } else continue;
     } while ( strlen(newCardTitle) >= TITLE_LIMIT || strlen(newCardTitle) == 0 );
 
     return newCardTitle;
@@ -72,7 +74,9 @@ char* setNewDescription()
 
     do {
         printf( "\nEnter a new description! (maximum %d character)\n", DESCRIPTION_LIMIT - 1 );
-        gets(newCardDescription );
+        if ( fgets( newCardDescription, DESCRIPTION_LIMIT, stdin ) )
+            newCardDescription[strcspn(newCardDescription, "\n")] = 0;
+        else continue;
     } while (strlen(newCardDescription) >= DESCRIPTION_LIMIT || strlen(newCardDescription) == 0 );
 
     return newCardDescription;
@@ -85,11 +89,16 @@ void setNewUser(CARD* card, USER user)
         return;
     }
 
-    if ( user.isAttachedToTable ) {
+    if ( user.userBoardIndex ) {
         (*card).currentUser = user;
+        (*card).previousUsers = (USER*)realloc( (*card).previousUsers, (*card).prvUserIndex+1 * sizeof(USER) );
+        if ( !(*card).previousUsers ) {
+            printf("\nCouldn't reallocate memory at set new user to card!");
+            exit(1);
+        }
+        //egybol beletesszuk a jelenlegi felhasznalot az elozo felhasznalok koze
         (*card).previousUsers[ (*card).prvUserIndex++ ] = user;
     }
-
 }
 
 void deleteCard(CARD* card)
@@ -109,14 +118,15 @@ void getPreviousUsers(CARD card)
             printUserData(card.previousUsers[i]);
         }
     } else {
-       printf("\tThere are no previous user of this card!\n");
+       printf("\tThere are no previous users of this card!\n");
     }
 }
 
-void printCardData(CARD card)
-{
-    if ( !card.title )
+void printCardData(CARD card) {
+    if (!card.title) {
+        printf("This board does not exist!\n");
         return;
+    }
 
     printf("Card -\ttitle: %s\n\tdescription: %s\n\tstatus: %s\n\tcurrent user: ", card.title, card.description, getCardStatus(card));
     if ( card.currentUser.name ) {
@@ -130,14 +140,19 @@ void printCardData(CARD card)
 
 void changeCardStatus(CARD* card)
 {
-    static int status;
+    const int bufferLimit = 2;
 
-    printf("\nWhat should be the status of this card? (type TO_DO (1), DOING (2) or DONE (3))\n");
-    scanf("%d", &status);
-    while ( status > 3 || status < 1 ) {
-        printf("\nThat's not a valid value! Type again!\n");
-        scanf("%d", &status);
-    }
+    int status;
+    char buf[bufferLimit];
+
+    do {
+        printf("\nWhat should be the status of this card? (type TO_DO (1), DOING (2) or DONE (3))\n");
+        if ( !fgets(buf, bufferLimit, stdin) ) {
+            printf("\nCouldn't read input!");
+            exit(1);
+        }
+        status = atoi(buf);
+    } while ( status < 1 || status > 3);
 
     (*card).status = status;
 }

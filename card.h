@@ -13,11 +13,9 @@ typedef struct {
     char* title;
     char* description;
     int status;
-    //jelenleg a kartyan dolgozo felhasznalo
-    USER currentUser;
-    //a kartyan mar dolgozott felhasznalok (tomb)
-    USER* previousUsers;
-    int prvUserIndex;
+    USER currentUser; //jelenleg a kartyan dolgozo felhasznalo
+    USER* previousUsers; //a kartyan mar dolgozott felhasznalok (tomb)
+    int prvUserIndex; //az elozo usereknek a szama
 }CARD;
 
 CARD createCard();
