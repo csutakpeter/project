@@ -443,10 +443,12 @@ void action13(BOARD* boards, int numberOfBoards)
 
 void action14(BOARD* boards, int numberOfBoards)
 {
-    if(numberOfBoards==0){
+    if(numberOfBoards==0)
+    {
         printf("\nThere are no boards!\n");
         return;
     }
+
     printf("\nList of boards:\n");
     for(int i=0; i<numberOfBoards; i++)
     {

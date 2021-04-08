@@ -61,7 +61,7 @@ void menu(BOARD** pBoards, int* pNumberOfBoards, USER** pUsers, int* pNumberOfUs
 void infoBox()
 {
     printf("Infobox:"
-           "\n\tCommand: 0 - exit\n"
+           "\n\tCommand: 0  - exit\n"
            "\tCommand: 1  - clear console and info box\n"
            "\tCommand: 2  - Create a new user\n"
            "\tCommand: 3  - List of users\n"
@@ -77,4 +77,5 @@ void infoBox()
            "\tCommand: 13 - Change any data of a card\n"
            "\tCommand: 14 - Display any cards by status\n"
            "\tCommand: 15 - List every board\n");
+
 }
