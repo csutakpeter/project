@@ -12,7 +12,6 @@ int main() {
 
     menu(&boards, &numberOfBoards, &users, &numberOfUsers);
 
-    printf("\nGoodbye!");
     return 0;
 }
 

@@ -137,7 +137,7 @@ void action1(USER** users, int* numberOfUsers )
 
 void action2(USER* users, int numberOfUsers ) {
     if ( !numberOfUsers) {
-        printf("\nThere are no users!");
+        printf("\nThere are no users!\n");
         return;
     }
 
@@ -159,12 +159,12 @@ void action3(BOARD** boards, int* numberOfBoards)
 void action4(BOARD** boards, int numberOfBoards, USER** users, int numberOfUsers)
 {
     if ( !numberOfBoards ) {
-        printf("\nThere are no boards!");
+        printf("\nThere are no boards!\n");
         return;
     }
 
     if ( !numberOfUsers) {
-        printf("\nThere are no users!");
+        printf("\nThere are no users!\n");
         return;
     }
 
@@ -172,7 +172,7 @@ void action4(BOARD** boards, int numberOfBoards, USER** users, int numberOfUsers
 
     int boardIndex = searchBoardByName((*boards), numberOfBoards, getAString(BOARD_NAME_LIMIT));
     if ( boardIndex == NOT_FOUND ) {
-        printf("\nBoard not found!");
+        printf("\nBoard not found!\n");
         return;
     }
 
@@ -180,7 +180,7 @@ void action4(BOARD** boards, int numberOfBoards, USER** users, int numberOfUsers
 
     int userIndex = searchUserByName((*users), numberOfUsers, getAString(USER_NAME_LIMIT));
     if ( userIndex == NOT_FOUND ) {
-        printf("\nUser not found!");
+        printf("\nUser not found!\n");
         return;
     }
 
@@ -190,7 +190,7 @@ void action4(BOARD** boards, int numberOfBoards, USER** users, int numberOfUsers
     }
 
     if ( searchUserByCodeInBoard( boards[boardIndex], (*users)[userIndex].code ) != NOT_FOUND ) {
-        printf("\nUser is already member of this board!");
+        printf("\nUser is already member of this board!\n");
     } else {
         addUserToBoard(&(*boards)[boardIndex], &(*users)[userIndex]);
     }
@@ -199,7 +199,7 @@ void action4(BOARD** boards, int numberOfBoards, USER** users, int numberOfUsers
 void action5(BOARD* boards, int numberOfBoards)
 {
     if ( !numberOfBoards ) {
-        printf("\nThere are no boards!");
+        printf("\nThere are no boards!\n");
         return;
     }
 
@@ -217,7 +217,7 @@ void action5(BOARD* boards, int numberOfBoards)
 void action6(BOARD** boards, int numberOfBoards)
 {
     if ( !numberOfBoards ) {
-        printf("\nThere are no boards!");
+        printf("\nThere are no boards!\n");
         return;
     }
 
@@ -225,7 +225,7 @@ void action6(BOARD** boards, int numberOfBoards)
 
     int boardIndex = searchBoardByName((*boards), numberOfBoards, getAString(BOARD_NAME_LIMIT));
     if ( boardIndex == NOT_FOUND) {
-        printf("\nBoard not found!");
+        printf("\nBoard not found!\n");
         return;
     }
 
@@ -235,7 +235,7 @@ void action6(BOARD** boards, int numberOfBoards)
 void action7(BOARD** boards, int numberOfBoards)
 {
     if ( !numberOfBoards ) {
-        printf("\nThere are no boards!");
+        printf("\nThere are no boards!\n");
         return;
     }
 
@@ -248,7 +248,7 @@ void action7(BOARD** boards, int numberOfBoards)
     }
 
     if ( !(*boards)[boardIndex].cardsIndex ) {
-        printf("\nThere are no cards in this board!");
+        printf("\nThere are no cards in this board!\n");
         return;
     }
 
@@ -256,7 +256,7 @@ void action7(BOARD** boards, int numberOfBoards)
 
     int cardIndex = searchCardByTitle(&(*boards)[boardIndex], getAString(TITLE_LIMIT));
     if ( cardIndex == NOT_FOUND ) {
-        printf("\nCard not found!");
+        printf("\nCard not found!\n");
         return;
     }
 
@@ -283,7 +283,7 @@ void action8(BOARD** boards, int numberOfBoards)
         return;
     }
 
-    printf("\nDo you want to add a user to a card by name or by code? ( 0 - code)");
+    printf("\nDo you want to add a user to a card by name or by code? ( 0 - code)\npress number: ");
     if ( !fgets(buf, ANSWER_BUFFER_LIMIT, stdin) ) {
         exit(1);
     }
@@ -295,14 +295,14 @@ void action8(BOARD** boards, int numberOfBoards)
         printf("\nType the name of the user you want to add to a card!\n");
         userIndex = searchUserByNameInBoard(&(*boards)[boardIndex], getAString(USER_NAME_LIMIT));
         if ( userIndex == NOT_FOUND ) {
-            printf("\nNo user with name given in this board!");
+            printf("\nNo user with name given in this board!\n");
             return;
         }
     } else {
         printf("\nType the code of the user you want to add to a card!\n");
         userIndex = searchUserByCodeInBoard(&(*boards)[boardIndex], getAString(SIZE_OF_UNIQUE_CODE));
         if ( userIndex == NOT_FOUND ) {
-            printf("\nNo user with code given in this board!");
+            printf("\nNo user with code given in this board!\n");
             return;
         }
     }
@@ -316,7 +316,7 @@ void action9(BOARD* boards, int numberOfBoards)
 
     int boardIndex = searchBoardByName(boards, numberOfBoards, getAString(BOARD_NAME_LIMIT));
     if ( boardIndex == NOT_FOUND ) {
-        printf("\nBoard not found!");
+        printf("\nBoard not found!\n");
         return;
     }
 
@@ -324,7 +324,7 @@ void action9(BOARD* boards, int numberOfBoards)
 
     int cardIndex = searchCardByTitle(&boards[boardIndex], getAString(TITLE_LIMIT));
     if ( cardIndex == NOT_FOUND ) {
-        printf("\nCard not found!");
+        printf("\nCard not found!\n");
         return;
     }
 
@@ -337,7 +337,7 @@ void action10(BOARD** boards, int numberOfBoards)
 
     int boardIndex = searchBoardByName((*boards), numberOfBoards, getAString(BOARD_NAME_LIMIT));
     if ( boardIndex == NOT_FOUND ) {
-        printf("\nBoard not found!");
+        printf("\nBoard not found!\n");
         return;
     }
 
@@ -345,7 +345,7 @@ void action10(BOARD** boards, int numberOfBoards)
 
     int cardIndex = searchCardByTitle(&(*boards)[boardIndex], getAString(TITLE_LIMIT));
     if ( cardIndex == NOT_FOUND ) {
-        printf("\nCard not found!");
+        printf("\nCard not found!\n");
         return;
     }
 
@@ -357,7 +357,7 @@ void action11(BOARD* boards, int numberOfBoards) {
 
     int boardIndex = searchBoardByName(boards, numberOfBoards, getAString(BOARD_NAME_LIMIT));
     if (boardIndex == NOT_FOUND) {
-        printf("\nBoard not found!");
+        printf("\nBoard not found!\n");
         return;
     }
 
@@ -365,16 +365,56 @@ void action11(BOARD* boards, int numberOfBoards) {
 
     int cardIndex = searchCardByTitle(&boards[boardIndex], getAString(TITLE_LIMIT));
     if (cardIndex == NOT_FOUND) {
-        printf("\nCard not found!");
+        printf("\nCard not found!\n");
         return;
     }
 
     printf("\nThe status of this card: %s", getCardStatus(boards[boardIndex].cards[cardIndex]));
 }
 
-void action12(BOARD** board, int numberOfBoards)
+void action12(BOARD** boards, int numberOfBoards)
 {
+    printf("\nWhich board do you want to work with? (type board name)\n");
 
+    int boardIndex = searchBoardByName((*boards), numberOfBoards, getAString(BOARD_NAME_LIMIT));
+    if (boardIndex == NOT_FOUND) {
+        printf("\nBoard not found!\n");
+        return;
+    }
+
+    printf("\nWhich card do you want to change data? (type card title)\n");
+
+    int cardIndex = searchCardByTitle(boards[boardIndex], getAString(TITLE_LIMIT));
+    if (cardIndex == NOT_FOUND) {
+        printf("\nCard not found!\n");
+        return;
+    }
+
+    int answer;
+    char buf[ANSWER_BUFFER_LIMIT];
+
+    printf("\nWhich attribute do you want to change of this card?"
+           "\n\tpress 1 - tittle"
+           "\n\tpress 2 - description"
+           "\n\tpress 3 - status");
+
+    do {
+        printf("Enter a command: ");
+        if (!fgets(buf, ANSWER_BUFFER_LIMIT, stdin)) {
+            printf("\nCouldn't read input!");
+            exit(1);
+        }
+        answer = atoi(buf);
+        switch ( answer ) {
+                // change title
+            case 1 : (*boards)[boardIndex].cards[cardIndex].title = setNewTitle(); break;
+                // change description
+            case 2 : (*boards)[boardIndex].cards[cardIndex].description = setNewDescription(); break;
+                // status
+            case 3 : changeCardStatus(&(*boards)[boardIndex].cards[cardIndex]); break;
+            default : printf("\nNo such command!\n"); break;
+        }
+    } while (answer);
 }
 
 void action13(BOARD* boards, int numberOfBoards)
