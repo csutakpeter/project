@@ -33,5 +33,6 @@ void action10(BOARD**, int);
 void action11(BOARD*, int);
 void action12(BOARD**, int);
 void action13(BOARD*, int);
+void action14(BOARD*, int);
 
 #endif //PROJEKT_FUNCTIONS_H

@@ -49,6 +49,8 @@ void menu(BOARD** pBoards, int* pNumberOfBoards, USER** pUsers, int* pNumberOfUs
             case 13 : action12(pBoards, (*pNumberOfBoards)); break;
                 // barmilyen statuszu kartya megjelenitese
             case 14 : action13((*pBoards), (*pNumberOfBoards)); break;
+                //ki listazza a boardokat
+            case 15 : action14((*pBoards), (*pNumberOfBoards)); break;
             default : if ( answer ) { printf("\nNo command by button pressed\n"); }; break;
         }
     } while ( answer );
@@ -63,15 +65,16 @@ void infoBox()
            "\tCommand: 1  - clear console and info box\n"
            "\tCommand: 2  - Create a new user\n"
            "\tCommand: 3  - List of users\n"
-           "\tCommand: 4  - Create a new table\n"
-           "\tCommand: 5  - Assign a user to the table\n"
-           "\tCommand: 6  - List the data of a table\n"
-           "\tCommand: 7  - Attach a card to a table\n"
-           "\tCommand: 8  - Delete a card from a table\n"
+           "\tCommand: 4  - Create a new board\n"
+           "\tCommand: 5  - Assign a user to the board\n"
+           "\tCommand: 6  - List the data of a board\n"
+           "\tCommand: 7  - Attach a card to a board\n"
+           "\tCommand: 8  - Delete a card from a board\n"
            "\tCommand: 9  - Attach a user to a card\n"
            "\tCommand: 10 - List users who worked on a card\n"
            "\tCommand: 11 - Changing a card status\n"
            "\tCommand: 12 - Card status\n"
            "\tCommand: 13 - Change any data of a card\n"
-           "\tCommand: 14 - Display any cards by status\n");
+           "\tCommand: 14 - Display any cards by status\n"
+           "\tCommand: 15 - List every board\n");
 }
