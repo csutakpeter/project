@@ -49,3 +49,21 @@ void menu(BOARD** pBoards, int* pNumberOfBoards, USER** pUsers, int* pNumberOfUs
         }
     } while ( answer );
 }
+void infoBox()
+{
+    printf("\tInfobox:"
+           "\n\tNumber: 1  - Delete date from the console\n"
+           "\tNumber: 2  - Creating a new user\n"
+           "\tNumber: 3  - List of users\n"
+           "\tNumber: 4  - Creating a new table\n"
+           "\tNumber: 5  - (Assign) a user to the table\n"
+           "\tNumber: 6  - List the data in a table by name\n"
+           "\tNumber: 7  - Add (attach) a card to a table\n"
+           "\tNumber: 8  - Delete a card from the table\n"
+           "\tNumber: 9  - Add (attach) a user to a card\n"
+           "\tNumber: 10 - List of users who worked on the card\n"
+           "\tNumber: 11 - Changing a card status\n"
+           "\tNumber: 12 - Card status\n"
+           "\tNumber: 13 - Changing a card data\n"
+           "\tNumber: 14 - Display any cards data ");
+}

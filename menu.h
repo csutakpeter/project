@@ -10,5 +10,6 @@
 #define ANSWER_BUFFER_LIMIT 10
 
 void menu(BOARD**, int*, USER**, int*);
+void infoBox();
 
 #endif //PROJEKT_MENU_H
