@@ -32,5 +32,6 @@ USER createUser();
 char* setName();
 char* generateUniqueCode();
 void printUserData(USER);
+void freeUser(USER*);
 
 #endif //PROJEKT_USER_H

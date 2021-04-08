@@ -11,5 +11,6 @@
 
 void menu(BOARD**, int*, USER**, int*);
 void infoBox();
+void freeEverything(BOARD**, int, USER**, int);
 
 #endif //PROJEKT_MENU_H

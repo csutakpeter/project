@@ -77,5 +77,17 @@ void infoBox()
            "\tCommand: 13 - Change any data of a card\n"
            "\tCommand: 14 - Display any cards by status\n"
            "\tCommand: 15 - List every board\n");
+}
 
+void freeEverything(BOARD** pBoards, int numberOfBoards, USER** pUsers, int numberOfUsers)
+{
+    for (int i = 0; i < numberOfBoards; ++i) {
+        freeBoard(pBoards[i]);
+    }
+    free(pBoards);
+
+    for (int i = 0; i < numberOfUsers; ++i) {
+        free(pUsers[i]);
+    }
+    free(pUsers);
 }

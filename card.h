@@ -30,5 +30,6 @@ void getPreviousUsers(CARD);
 void changeCardStatus(CARD*);
 char* getCardStatus(CARD);
 void printCardData(CARD);
+void freeCard(CARD*);
 
 #endif //PROJEKT_CARD_H

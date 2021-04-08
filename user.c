@@ -78,3 +78,15 @@ void printUserData(USER user)
     printf("User -\tname: %s\n\tcode: %s\n\t%s", user.name, user.code,
            ( user.userBoardIndex ) ? "This user is attached to a table.\n" : "This user is not attached to any table.\n");
 }
+
+void freeUser(USER* user)
+{
+    free((*user).name);
+    free((*user).code);
+    for (int i = 0; i < (*user).userBoardIndex; ++i) {
+        free((*user).boards[i].boardName);
+    }
+    (*user).userBoardIndex = 0;
+    free((*user).boards);
+    free(user);
+}

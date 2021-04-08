@@ -170,3 +170,13 @@ char* getCardStatus(CARD card)
     }
 }
 
+void freeCard(CARD* card)
+{
+    free((*card).title);
+    free((*card).description);
+    for (int i = 0; i < (*card).prvUserIndex; ++i)
+        freeUser(&(*card).previousUsers[i]);
+    freeUser(&(*card).currentUser);
+    (*card).prvUserIndex = 0;
+    (*card).status = 0;
+}

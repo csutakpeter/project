@@ -12,6 +12,8 @@ int main() {
 
     menu(&boards, &numberOfBoards, &users, &numberOfUsers);
 
+    freeEverything(&boards, numberOfBoards, &users, numberOfUsers);
+
     return 0;
 }
 

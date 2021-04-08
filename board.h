@@ -23,5 +23,6 @@ void addUserToBoard(BOARD*, USER*);
 void addCardToBoard(BOARD*);
 void printBoardData(BOARD);
 void deleteCardFromBoard(BOARD*, int);
+void freeBoard(BOARD*);
 
 #endif //PROJEKT_BOARD_H
