@@ -503,7 +503,8 @@ void action13(BOARD* boards, int numberOfBoards)
                     printCardData(boards[i].cards[j]);
                 }
             }
-        } else c++;
+        }
+        c++;
     }
 
     if ( !c )

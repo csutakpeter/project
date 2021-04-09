@@ -98,7 +98,7 @@ void setNewUser(CARD* card, USER user)
             }
             //beletesszuk a jelenlegi felhasznalot az elozo felhasznalok koze
             (*card).previousUsers[(*card).prvUserIndex++] = user;
-            qsort((*card).previousUsers, (*card).prvUserIndex, sizeof(CARD), userNameCmp);
+            //qsort((*card).previousUsers, (*card).prvUserIndex, sizeof(CARD), userNameCmp);
         } else {
             (*card).currentUser = user;
         }
