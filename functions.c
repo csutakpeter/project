@@ -142,6 +142,7 @@ void action2(USER* users, int numberOfUsers ) {
         return;
     }
 
+    printf("\nList of users:\n");
     for (int i = 0; i < numberOfUsers; ++i) {
         printUserData(users[i]);
     }

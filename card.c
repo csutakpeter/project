@@ -87,11 +87,11 @@ void setNewUser(CARD* card, USER user)
         return;
     }
 
-    if ( user.userBoardIndex) {
+    if ( user.userBoardIndex ) {
         int userIndex = searchUserByName((*card).previousUsers, (*card).prvUserIndex, user.name);
         if (userIndex == NOT_FOUND) {
             (*card).currentUser = user;
-            (*card).previousUsers = (USER *) realloc((*card).previousUsers, (*card).prvUserIndex + 1 * sizeof(USER));
+            (*card).previousUsers = (USER *) realloc((*card).previousUsers, ((*card).prvUserIndex + 1 )* sizeof(USER));
             if (!(*card).previousUsers) {
                 printf("\nCouldn't reallocate memory at set new user to card!");
                 exit(1);
