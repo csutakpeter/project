@@ -73,7 +73,7 @@ void infoBox()
            "\tCommand: 9  - Attach a user to a card\n"
            "\tCommand: 10 - List users who worked on a card\n"
            "\tCommand: 11 - Changing a card status\n"
-           "\tCommand: 12 - Card status\n"
+           "\tCommand: 12 - Get card status\n"
            "\tCommand: 13 - Change any data of a card\n"
            "\tCommand: 14 - Display any cards by status\n"
            "\tCommand: 15 - List every board\n");
@@ -90,7 +90,7 @@ void freeEverything(BOARD** pBoards, int numberOfBoards, USER** pUsers, int numb
     printf("\nBoard megsemmisitve!");
 
     for (int i = 0; i < numberOfUsers; ++i) {
-        //freeUser(pUsers[i]);
+        freeUser(pUsers[i]);
     }
     printf("\nUser megsemmisitve!");
 

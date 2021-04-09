@@ -153,7 +153,11 @@ void action3(BOARD** boards, int* numberOfBoards)
     if ( !(*boards) )
         exit(1);
 
-    (*boards)[(*numberOfBoards)++] = createBoard();
+    do {
+        (*boards)[(*numberOfBoards)] = createBoard();
+    } while ( searchBoardByName((*boards), (*numberOfBoards), (*boards)[*numberOfBoards].boardName) != NOT_FOUND);
+
+    (*numberOfBoards)++;
     qsort((*boards), (*numberOfBoards), sizeof(BOARD), cmpfunc);
 }
 
@@ -244,7 +248,7 @@ void action7(BOARD** boards, int numberOfBoards)
 
     int boardIndex = searchBoardByName((*boards), numberOfBoards, getAString(BOARD_NAME_LIMIT));
     if ( boardIndex == NOT_FOUND ) {
-        printf("\nBoard not found!");
+        printf("\nBoard not found!\n");
         return;
     }
 
@@ -266,6 +270,11 @@ void action7(BOARD** boards, int numberOfBoards)
 
 void action8(BOARD** boards, int numberOfBoards)
 {
+    if ( !numberOfBoards ) {
+        printf("\nThere are no cards!");
+        return;
+    }
+
     char buf[ANSWER_BUFFER_LIMIT];
 
     printf("\nWhich board do you want to work with? (type board name)\n");
@@ -318,11 +327,21 @@ void action8(BOARD** boards, int numberOfBoards)
 
 void action9(BOARD* boards, int numberOfBoards)
 {
+    if ( !numberOfBoards ) {
+        printf("\nThere are no cards!\n");
+        return;
+    }
+
     printf("\nWhich board do you want to work with? (type board name)\n");
 
     int boardIndex = searchBoardByName(boards, numberOfBoards, getAString(BOARD_NAME_LIMIT));
     if ( boardIndex == NOT_FOUND ) {
         printf("\nBoard not found!\n");
+        return;
+    }
+
+    if ( !boards[boardIndex].cardsIndex ) {
+        printf("\nThere are no cards in this board!\n");
         return;
     }
 
@@ -339,11 +358,21 @@ void action9(BOARD* boards, int numberOfBoards)
 
 void action10(BOARD** boards, int numberOfBoards)
 {
+    if ( !numberOfBoards ) {
+        printf("\nThere are no cards!\n");
+        return;
+    }
+
     printf("\nWhich board do you want to work with? (type board name)\n");
 
     int boardIndex = searchBoardByName((*boards), numberOfBoards, getAString(BOARD_NAME_LIMIT));
     if ( boardIndex == NOT_FOUND ) {
         printf("\nBoard not found!\n");
+        return;
+    }
+
+    if ( !(*boards)[boardIndex].cardsIndex ) {
+        printf("\nThere are no cards in this board!\n");
         return;
     }
 
@@ -359,11 +388,22 @@ void action10(BOARD** boards, int numberOfBoards)
 }
 
 void action11(BOARD* boards, int numberOfBoards) {
+
+    if ( !numberOfBoards ) {
+        printf("\nThere are no cards!\n");
+        return;
+    }
+
     printf("\nWhich board do you want to work with? (type board name)\n");
 
     int boardIndex = searchBoardByName(boards, numberOfBoards, getAString(BOARD_NAME_LIMIT));
     if (boardIndex == NOT_FOUND) {
         printf("\nBoard not found!\n");
+        return;
+    }
+
+    if ( !boards[boardIndex].cardsIndex ) {
+        printf("\nThere are no cards in this board!\n");
         return;
     }
 
@@ -380,11 +420,21 @@ void action11(BOARD* boards, int numberOfBoards) {
 
 void action12(BOARD** boards, int numberOfBoards)
 {
+    if ( !numberOfBoards) {
+        printf("\nThere are no cards!\n");
+        return;
+    }
+
     printf("\nWhich board do you want to work with? (type board name)\n");
 
     int boardIndex = searchBoardByName((*boards), numberOfBoards, getAString(BOARD_NAME_LIMIT));
     if (boardIndex == NOT_FOUND) {
         printf("\nBoard not found!\n");
+        return;
+    }
+
+    if ( !(*boards)[boardIndex].cardsIndex ) {
+        printf("\nThere are no cards in this board!\n");
         return;
     }
 
@@ -425,6 +475,11 @@ void action12(BOARD** boards, int numberOfBoards)
 
 void action13(BOARD* boards, int numberOfBoards)
 {
+    if ( !numberOfBoards ) {
+        printf("\nThere are no cards!\n");
+        return;
+    }
+
     int status;
     char buf[ANSWER_BUFFER_LIMIT];
 
@@ -437,14 +492,21 @@ void action13(BOARD* boards, int numberOfBoards)
         status = atoi(buf);
     } while ( status < 1 || status > 3);
 
+    int c = 0;
+
     for ( int i = 0; i < numberOfBoards; ++i) {
-        printf("\nBoard - %s\n", boards[i].boardName);
-        for (int j = 0; j < boards[i].cardsIndex; ++j) {
-            if ( boards[i].cards[j].status == status) {
-                printCardData(boards[i].cards[j]);
+        if ( boards[i].cardsIndex ) {
+            printf("\nBoard - %s\n", boards[i].boardName);
+            for (int j = 0; j < boards[i].cardsIndex; ++j) {
+                if (boards[i].cards[j].status == status) {
+                    printCardData(boards[i].cards[j]);
+                }
             }
-        }
+        } else c++;
     }
+
+    if ( !c )
+        printf("\nThere are no boards\n");
 }
 
 void action14(BOARD* boards, int numberOfBoards)

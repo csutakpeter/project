@@ -82,9 +82,5 @@ void printUserData(USER user)
 
 void freeUser(USER* user)
 {
-    if ( (*user).boards != NULL) {
-        free((*user).name);
-        free((*user).code);
-        free((*user).boards);
-    }
+
 }

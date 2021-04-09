@@ -108,10 +108,12 @@ void setNewUser(CARD* card, USER user)
 
 void deleteCard(CARD* card)
 {
-    (*card).description = NULL;
-    (*card).title = NULL;
-    (*card).currentUser.name = NULL;
-    (*card).currentUser.code = NULL;
+    free((*card).description);
+    free((*card).title);
+    free((*card).currentUser.name);
+    free((*card).currentUser.code);
+    for (int i = 0; i < (*card).prvUserIndex; ++i)
+        freeUser(&(*card).previousUsers[i]);
     free((*card).previousUsers);
 }
 
@@ -172,11 +174,5 @@ char* getCardStatus(CARD card)
 
 void freeCard(CARD* card)
 {
-    free((*card).title);
-    free((*card).description);
-    for (int i = 0; i < (*card).prvUserIndex; ++i)
-        //freeUser(&(*card).previousUsers[i]);
-    //freeUser(&(*card).currentUser);
-    (*card).prvUserIndex = 0;
-    (*card).status = 0;
+
 }

@@ -154,7 +154,7 @@ void addCardToBoard(BOARD* board)
     ++(*board).cardsIndex;
 
     //A kartyara mashol nincs szukseg
-    deleteCard(&newCard);
+    //deleteCard(&newCard);
 }
 
 void deleteCardFromBoard(BOARD* board, int index)
@@ -179,11 +179,5 @@ void deleteCardFromBoard(BOARD* board, int index)
 
 void freeBoard(BOARD* board)
 {
-    free((*board).boardName);
-    for (int i = 0; i < (*board).cardsIndex; ++i)
-        freeCard(&(*board).cards[i]);
-    for (int i = 0; i < (*board).usersIndex; ++i)
-        freeUser(&(*board).users[i]);
-    ((*board).cardsIndex) = 0;
-    ((*board).usersIndex) = 0;
+
 }
