@@ -70,6 +70,7 @@ char* generateUniqueCode()
 
 void printUserData(USER user)
 {
+    //printf("\n%s\n", user.code);
     if (!user.code) {
         printf("This user does not exist!\n");
         return;
@@ -81,12 +82,9 @@ void printUserData(USER user)
 
 void freeUser(USER* user)
 {
-    free((*user).name);
-    free((*user).code);
-    for (int i = 0; i < (*user).userBoardIndex; ++i) {
-        free((*user).boards[i].boardName);
+    if ( (*user).boards != NULL) {
+        free((*user).name);
+        free((*user).code);
+        free((*user).boards);
     }
-    (*user).userBoardIndex = 0;
-    free((*user).boards);
-    free(user);
 }

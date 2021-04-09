@@ -51,7 +51,7 @@ void menu(BOARD** pBoards, int* pNumberOfBoards, USER** pUsers, int* pNumberOfUs
             case 14 : action13((*pBoards), (*pNumberOfBoards)); break;
                 //ki listazza a boardokat
             case 15 : action14((*pBoards), (*pNumberOfBoards)); break;
-            default : if ( answer ) { printf("\nNo command by button pressed\n"); }; break;
+            default : if ( answer ) { printf("\nNo command by button pressed\n"); } break;
         }
     } while ( answer );
 
@@ -84,10 +84,15 @@ void freeEverything(BOARD** pBoards, int numberOfBoards, USER** pUsers, int numb
     for (int i = 0; i < numberOfBoards; ++i) {
         freeBoard(pBoards[i]);
     }
-    free(pBoards);
+    printf("\nBoard megsemmisitve!");
+    free((*pBoards));
+
+    printf("\nBoard megsemmisitve!");
 
     for (int i = 0; i < numberOfUsers; ++i) {
-        free(pUsers[i]);
+        //freeUser(pUsers[i]);
     }
-    free(pUsers);
+    printf("\nUser megsemmisitve!");
+
+    free((*pUsers));
 }

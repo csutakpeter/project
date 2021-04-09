@@ -272,7 +272,12 @@ void action8(BOARD** boards, int numberOfBoards)
 
     int boardIndex = searchBoardByName((*boards), numberOfBoards, getAString(BOARD_NAME_LIMIT));
     if ( boardIndex == NOT_FOUND ) {
-        printf("\nBoard not found!");
+        printf("\nBoard not found!\n");
+        return;
+    }
+
+    if ( !(*boards)[boardIndex].cardsIndex ) {
+        printf("\nThere are no cards in this board!\n");
         return;
     }
 
@@ -280,7 +285,7 @@ void action8(BOARD** boards, int numberOfBoards)
 
     int cardIndex = searchCardByTitle(&(*boards)[boardIndex], getAString(TITLE_LIMIT));
     if ( cardIndex == NOT_FOUND ) {
-        printf("\nCard not found!");
+        printf("\nCard not found!\n");
         return;
     }
 
@@ -370,7 +375,7 @@ void action11(BOARD* boards, int numberOfBoards) {
         return;
     }
 
-    printf("\nThe status of this card: %s", getCardStatus(boards[boardIndex].cards[cardIndex]));
+    printf("\nThe status of this card: %s\n", getCardStatus(boards[boardIndex].cards[cardIndex]));
 }
 
 void action12(BOARD** boards, int numberOfBoards)
