@@ -132,7 +132,8 @@ void action1(USER** users, int* numberOfUsers )
     (*users) = (USER*)realloc( (*users), ((*numberOfUsers) + 1) * sizeof(USER) );
     if ( !(*users) )
         exit(1);
-    (*users)[(*numberOfUsers)++] = createUser();
+    (*users)[(*numberOfUsers)] = createUser();
+    (*numberOfUsers)++;
     qsort((*users), (*numberOfUsers), sizeof(USER), userNameCmp);
 }
 

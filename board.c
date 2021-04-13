@@ -179,5 +179,10 @@ void deleteCardFromBoard(BOARD* board, int index)
 
 void freeBoard(BOARD* board)
 {
-
+    free((*board).boardName);
+    for (int i = 0; i < (*board).cardsIndex; ++i) {
+        freeCard(&(*board).cards[i]);
+    }
+    free((*board).cards);
+    free((*board).users);
 }

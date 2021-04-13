@@ -82,5 +82,7 @@ void printUserData(USER user)
 
 void freeUser(USER* user)
 {
-
+    free((*user).boards);
+    free((*user).name);
+    free((*user).code);
 }

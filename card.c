@@ -174,5 +174,7 @@ char* getCardStatus(CARD card)
 
 void freeCard(CARD* card)
 {
-
+    free((*card).title);
+    free((*card).description);
+    free((*card).previousUsers);
 }

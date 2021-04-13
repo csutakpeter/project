@@ -82,15 +82,13 @@ void infoBox()
 void freeEverything(BOARD** pBoards, int numberOfBoards, USER** pUsers, int numberOfUsers)
 {
     for (int i = 0; i < numberOfBoards; ++i) {
-        freeBoard(pBoards[i]);
+        freeBoard(&(*pBoards)[i]);
     }
-    printf("\nBoard megsemmisitve!");
     free((*pBoards));
 
-    printf("\nBoard megsemmisitve!");
-
     for (int i = 0; i < numberOfUsers; ++i) {
-        freeUser(pUsers[i]);
+        freeUser(&(*pUsers)[i]);
+        printf("\nXD\n");
     }
     printf("\nUser megsemmisitve!");
 
