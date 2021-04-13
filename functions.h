@@ -9,7 +9,6 @@
 
 #define NOT_FOUND -1
 
-
 void initializeBoards(BOARD**, int*);
 void initializeUsers(USER**, int*);
 int searchUserByCodeInBoard(BOARD*, char*);
