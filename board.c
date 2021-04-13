@@ -183,6 +183,9 @@ void freeBoard(BOARD* board)
     for (int i = 0; i < (*board).cardsIndex; ++i) {
         freeCard(&(*board).cards[i]);
     }
+    for (int i = 0; i < (*board).usersIndex; ++i) {
+        freeUser(&(*board).users[i]);
+    }
     free((*board).cards);
     free((*board).users);
 }
