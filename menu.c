@@ -7,7 +7,7 @@
 void menu(BOARD** pBoards, int* pNumberOfBoards, USER** pUsers, int* pNumberOfUsers)
 {
     system("cls");
-    printf("Welcome:\n");
+    printf("Welcome in Sapitrello:\n");
     infoBox();
 
     int answer;
