@@ -170,8 +170,12 @@ void deleteCardFromBoard(BOARD* board, int index)
     deleteCard(&(*board).cards[(*board).cardsIndex-1]);
 
     --(*board).cardsIndex;
-    (*board).cards = (CARD*)realloc((*board).cards, (*board).cardsIndex * sizeof(CARD));
-    if ( !(*board).cards ) {
+    if ( (*board).cardsIndex > 0 ) {
+        (*board).cards = (CARD *) realloc((*board).cards, (*board).cardsIndex * sizeof(CARD));
+    } else {
+        (*board).cardsIndex = 1;
+    }
+    if ( !(*board).cards  ) {
         printf("\nCouldn't reallocate memory at delete card from board!");
         exit(1);
     }

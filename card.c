@@ -110,8 +110,6 @@ void deleteCard(CARD* card)
 {
     free((*card).description);
     free((*card).title);
-    free((*card).currentUser.name);
-    free((*card).currentUser.code);
     free((*card).previousUsers);
 }
 
