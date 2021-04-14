@@ -112,8 +112,6 @@ void deleteCard(CARD* card)
     free((*card).title);
     free((*card).currentUser.name);
     free((*card).currentUser.code);
-    for (int i = 0; i < (*card).prvUserIndex; ++i)
-        freeUser(&(*card).previousUsers[i]);
     free((*card).previousUsers);
 }
 

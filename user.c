@@ -82,9 +82,6 @@ void printUserData(USER user)
 
 void freeUser(USER* user)
 {
-    for (int i = 0; i < (*user).userBoardIndex; ++i) {
-        free((*user).boards[i].boardName);
-    }
     free((*user).boards);
     free((*user).name);
     free((*user).code);
