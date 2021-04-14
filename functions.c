@@ -273,7 +273,7 @@ void action7(BOARD** boards, int numberOfBoards)
 void action8(BOARD** boards, int numberOfBoards)
 {
     if ( !numberOfBoards ) {
-        printf("\nThere are no cards!");
+        printf("\nThere are no cards!\n");
         return;
     }
 
