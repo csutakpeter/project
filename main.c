@@ -1,6 +1,19 @@
-#include <stdio.h>
+
+#include "menu.h"
 
 int main() {
-    printf("Hello, World!\n");
+
+    int numberOfBoards, numberOfUsers;
+    BOARD* boards;
+    USER* users;
+
+    initializeBoards(&boards, &numberOfBoards);
+    initializeUsers(&users, &numberOfUsers);
+
+    menu(&boards, &numberOfBoards, &users, &numberOfUsers);
+
+    freeEverything(&boards, numberOfBoards, &users, numberOfUsers);
+
     return 0;
 }
+
