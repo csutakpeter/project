@@ -128,7 +128,6 @@ char* getAString(int limit)
 
 void action1(USER** users, int* numberOfUsers )
 {
-    
     (*users) = (USER*)realloc( (*users), ((*numberOfUsers) + 1) * sizeof(USER) );
     if ( !(*users) )
         exit(1);
@@ -200,6 +199,7 @@ void action4(BOARD** boards, int numberOfBoards, USER** users, int numberOfUsers
         printf("\nUser is already member of this board!\n");
     } else {
         addUserToBoard(&(*boards)[boardIndex], &(*users)[userIndex]);
+        printf("\nUser successfully added!\n");
     }
 }
 
@@ -237,6 +237,7 @@ void action6(BOARD** boards, int numberOfBoards)
     }
 
     addCardToBoard(&(*boards)[boardIndex]);
+    printf("\nCard successfully added!\n");
 }
 
 void action7(BOARD** boards, int numberOfBoards)
@@ -268,6 +269,7 @@ void action7(BOARD** boards, int numberOfBoards)
     }
 
     deleteCardFromBoard(&(*boards)[boardIndex], cardIndex);
+    printf("\nCard successfully deleted!\n");
 }
 
 void action8(BOARD** boards, int numberOfBoards)

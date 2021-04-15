@@ -70,7 +70,6 @@ char* generateUniqueCode()
 
 void printUserData(USER user)
 {
-    //printf("\n%s\n", user.code);
     if (!user.code) {
         printf("This user does not exist!\n");
         return;

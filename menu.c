@@ -7,7 +7,7 @@
 void menu(BOARD** pBoards, int* pNumberOfBoards, USER** pUsers, int* pNumberOfUsers)
 {
     system("cls");
-    printf("Welcome in Sapitrello:\n");
+    printf("Welcome to Sapitrello:\n");
     infoBox();
 
     int answer;
@@ -20,6 +20,7 @@ void menu(BOARD** pBoards, int* pNumberOfBoards, USER** pUsers, int* pNumberOfUs
             exit(1);
         }
         answer = atoi(buf);
+
         if ( !answer ) {
             printf("\nAre you sure you want to quit? (press y if yes, anything else otherwise)\n");
             if (fgets(buf, USER_NAME_LIMIT, stdin))
@@ -29,6 +30,7 @@ void menu(BOARD** pBoards, int* pNumberOfBoards, USER** pUsers, int* pNumberOfUs
             }
             answer = 1;
         }
+
         switch ( answer ) {
                 //Adatok torlese a konzolbol ( CLion terminalban nem mukodik! )
             case 1 : system("cls"); infoBox(); break;
